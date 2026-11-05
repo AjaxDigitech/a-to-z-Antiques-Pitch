@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A to Z Antiques – Timeless Treasures in Cottondale</title>
+  <meta name="description" content="Discover rare collectibles, vintage furniture, and unique home décor at A to Z Antiques in Cottondale. Visit us Mon–Sat, 10 AM–6 PM." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment:  '#f5f0e8',
+            ivory:      '#faf7f2',
+            sepia:      '#a0522d',
+            'sepia-light': '#c68642',
+            'sepia-dark':  '#7a3b1e',
+            charcoal:   '#2c2416',
+            'warm-gray':'#6b5e4e',
+            'warm-gray-light': '#c4b49a',
+            'wood-dark':'#3d2b1f',
+            'cream':    '#ede8de',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    * { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #faf7f2;
+      color: #2c2416;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+    .ornament::before,
+    .ornament::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: #a0522d;
+      opacity: 0.6;
+    }
+    .ornament span {
+      color: #a0522d;
+      font-size: 1rem;
+    }
+
+    .nav-link {
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: #a0522d;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .hero-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(28, 18, 10, 0.55) 0%,
+        rgba(28, 18, 10, 0.72) 60%,
+        rgba(28, 18, 10, 0.85) 100%
+      );
+    }
+
+    .card-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(44, 36, 22, 0.14);
+    }
+
+    .testimonial-card {
+      background: #faf7f2;
+      border: 1px solid #e8dfd0;
+      border-top: 3px solid #a0522d;
+    }
+
+    .cta-banner {
+      background-color: #3d2b1f;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .feature-icon {
+      width: 64px; height: 64px;
+      background: #f5f0e8;
+      border: 2px solid #c4b49a;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .feature-card:hover .feature-icon {
+      background: #a0522d;
+      border-color: #a0522d;
+    }
+    .feature-card:hover .feature-icon i { color: #fff !important; }
+
+    #mobile-menu {
+      transition: max-height 0.35s ease, opacity 0.35s ease;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+    #mobile-menu.open {
+      max-height: 320px;
+      opacity: 1;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .btn-primary {
+      background-color: #a0522d;
+      color: #faf7f2;
+      border: 2px solid #a0522d;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 0.75rem 2rem;
+      transition: background 0.25s ease, color 0.25s ease;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background-color: #7a3b1e;
+      border-color: #7a3b1e;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: #faf7f2;
+      border: 2px solid rgba(245, 240, 232, 0.75);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.75rem 2rem;
+      transition: background 0.25s ease, border-color 0.25s ease;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      background-color: rgba(245, 240, 232, 0.12);
+      border-color: #faf7f2;
+    }
+  </style>
+</head>
+
+<body class="bg-ivory text-charcoal antialiased">
+
+  <!-- ══════════════════════════
+       HEADER / NAVIGATION
+  ══════════════════════════ -->
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-ivory border-b border-cream transition-shadow duration-300">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+
+        <!-- Logo -->
+        <a href="#home" class="flex flex-col leading-none group" aria-label="A to Z Antiques Home">
+          <span class="font-serif text-xl lg:text-2xl font-bold text-charcoal tracking-tight group-hover:text-sepia transition-colors duration-200">
+            A to Z Antiques
+          </span>
+          <span class="text-[10px] lg:text-xs tracking-[0.2em] uppercase text-warm-gray font-sans font-medium mt-0.5">
+            Est. Cottondale
+          </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-7 lg:gap-8">
+          <a href="#home"     class="nav-link text-sm font-medium text-warm-gray hover:text-charcoal transition-colors duration-200">Home</a>
+          <a href="#features" class="nav-link text-sm font-medium text-warm-gray hover:text-charcoal transition-colors duration-200">Featured Finds</a>
+          <a href="#reviews"  class="nav-link text-sm font-medium text-warm-gray hover:text-charcoal transition-colors duration-200">Reviews</a>
+          <a href="#visit"    class="nav-link text-sm font-medium text-warm-gray hover:text-charcoal transition-colors duration-200">Visit Us</a>
+          <a href="https://maps.google.com/?q=A+to+Z+Antiques+Cottondale" target="_blank" rel="noopener"
+             class="btn-primary text-sm">
+            <i class="fa-solid fa-location-dot mr-2 text-xs"></i>Get Directions
+          </a>
+        </nav>
+
+        <!-- Mobile Hamburger -->
+        <button id="hamburger" class="md:hidden flex flex-col justify-center gap-1.5 w-8 h-8 cursor-pointer" aria-label="Toggle Menu" aria-expanded="false">
+          <span class="ham-bar block w-full h-0.5 bg-charcoal rounded transition-all duration-300 origin-center"></span>
+          <span class="ham-bar block w-full h-0.5 bg-charcoal rounded transition-all duration-300"></span>
+          <span class="ham-bar block w-5/6 h-0.5 bg-charcoal rounded transition-all duration-300 origin-center"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden bg-ivory border-t border-cream">
+      <nav class="flex flex-col px-5 py-4 gap-1">
+        <a href="#home"     class="mobile-link py-2.5 text-sm font-medium text-warm-gray border-b border-cream/60 hover:text-sepia transition-colors">Home</a>
+        <a href="#features" class="mobile-link py-2.5 text-sm font-medium text-warm-gray border-b border-cream/60 hover:text-sepia transition-colors">Featured Finds</a>
+        <a href="#reviews"  class="mobile-link py-2.5 text-sm font-medium text-warm-gray border-b border-cream/60 hover:text-sepia transition-colors">Reviews</a>
+        <a href="#visit"    class="mobile-link py-2.5 text-sm font-medium text-warm-gray border-b border-cream/60 hover:text-sepia transition-colors">Visit Us</a>
+        <a href="https://maps.google.com/?q=A+to+Z+Antiques+Cottondale" target="_blank" rel="noopener"
+           class="mt-3 btn-primary text-sm text-center">
+          <i class="fa-solid fa-location-dot mr-2 text-xs"></i>Get Directions
+        </a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════
+       HERO SECTION
+  ══════════════════════════ -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 lg:pt-20">
+
+    <img
+      src="hero.jpg"
+      alt="Vintage antique store interior with warm lighting"
+      class="absolute inset-0 w-full h-full object-cover object-center"
+      loading="eager"
+    />
+
+    <div class="hero-overlay absolute inset-0"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center text-ivory">
+
+      <div class="inline-flex items-center gap-3 mb-6">
+        <span class="block w-10 h-px bg-sepia-light opacity-80"></span>
+        <span class="text-xs uppercase tracking-[0.25em] font-sans font-medium text-warm-gray-light">
+          Cottondale's Finest
+        </span>
+        <span class="block w-10 h-px bg-sepia-light opacity-80"></span>
+      </div>
+
+      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6 drop-shadow-lg">
+        Discover Timeless<br />
+        <span class="italic font-normal text-sepia-light">Treasures</span> in Cottondale.
+      </h1>
+
+      <p class="font-sans text-base sm:text-lg lg:text-xl text-warm-gray-light max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+        From rare collectibles to vintage furniture, explore a curated collection of history's finest pieces right in your neighborhood.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#features" class="btn-primary text-sm">
+          <i class="fa-solid fa-images mr-2 text-xs"></i>View Gallery
+        </a>
+        <a href="#visit" class="btn-secondary text-sm">
+          <i class="fa-regular fa-clock mr-2 text-xs"></i>Store Hours &amp; Location
+        </a>
+      </div>
+
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 animate-bounce">
+        <span class="text-[10px] tracking-widest uppercase text-warm-gray-light font-sans">Explore</span>
+        <i class="fa-solid fa-chevron-down text-sepia-light text-sm"></i>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       INTRO STRIP
+  ══════════════════════════ -->
+  <section class="bg-sepia py-5 px-6">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-ivory">
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-store text-sepia-light text-lg"></i>
+        <span class="font-sans text-sm font-medium tracking-wide">Family-Owned Since Day One</span>
+      </div>
+      <div class="hidden sm:block w-px h-5 bg-sepia-light opacity-40"></div>
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-magnifying-glass text-sepia-light text-lg"></i>
+        <span class="font-sans text-sm font-medium tracking-wide">Thousands of Unique Finds</span>
+      </div>
+      <div class="hidden sm:block w-px h-5 bg-sepia-light opacity-40"></div>
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-heart text-sepia-light text-lg"></i>
+        <span class="font-sans text-sm font-medium tracking-wide">Loved by the Community</span>
+      </div>
+      <div class="hidden sm:block w-px h-5 bg-sepia-light opacity-40"></div>
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-map-pin text-sepia-light text-lg"></i>
+        <span class="font-sans text-sm font-medium tracking-wide">Cottondale, FL</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       FEATURE GRID
+  ══════════════════════════ -->
+  <section id="features" class="bg-ivory py-20 lg:py-28 px-5">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <div class="ornament"><span>&#10022;</span></div>
+        <p class="text-xs uppercase tracking-[0.22em] font-sans font-semibold text-sepia mb-3">Featured Finds</p>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mb-5">
+          Something for Every Collector
+        </h2>
+        <p class="font-sans text-base text-warm-gray leading-relaxed">
+          Whether you're hunting for a statement piece or a sentimental keepsake, our ever-changing inventory has something waiting just for you.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+
+        <!-- Vintage Furniture -->
+        <div class="feature-card bg-parchment border border-cream card-lift reveal overflow-hidden group">
+          <div class="relative h-52 overflow-hidden">
+            <img
+              src="grid1.jpg"
+              alt="Vintage wooden furniture"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='grid1.jpg'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-wood-dark/50 to-transparent"></div>
+          </div>
+          <div class="p-7">
+            <div class="feature-icon">
+              <i class="fa-solid fa-couch text-sepia text-xl"></i>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-charcoal mb-3 text-center">Vintage Furniture</h3>
+            <p class="font-sans text-sm text-warm-gray leading-relaxed text-center">
+              From Victorian parlour chairs to mid-century dressers, our furniture collection spans centuries of craftsmanship. Each piece tells a story and brings lasting character to any home.
+            </p>
+            <div class="mt-5 text-center">
+              <a href="#visit" class="text-sepia text-xs font-sans font-semibold uppercase tracking-widest hover:text-sepia-dark transition-colors">
+                Browse In-Store <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rare Collectibles -->
+        <div class="feature-card bg-parchment border border-cream card-lift reveal overflow-hidden group" style="transition-delay: 0.1s">
+          <div class="relative h-52 overflow-hidden">
+            <img
+              src="grid2.jpg"
+              alt="Rare vintage collectibles"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='grid2.jpg'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-wood-dark/50 to-transparent"></div>
+          </div>
+          <div class="p-7">
+            <div class="feature-icon">
+              <i class="fa-solid fa-gem text-sepia text-xl"></i>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-charcoal mb-3 text-center">Rare Collectibles</h3>
+            <p class="font-sans text-sm text-warm-gray leading-relaxed text-center">
+              Coins, stamps, vintage watches, porcelain figurines, and much more. Our curated selection of collectibles is a treasure hunter's paradise—new items arrive every week.
+            </p>
+            <div class="mt-5 text-center">
+              <a href="#visit" class="text-sepia text-xs font-sans font-semibold uppercase tracking-widest hover:text-sepia-dark transition-colors">
+                Browse In-Store <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Home Decor & Art -->
+        <div class="feature-card bg-parchment border border-cream card-lift reveal overflow-hidden group" style="transition-delay: 0.2s">
+          <div class="relative h-52 overflow-hidden">
+            <img
+              src="grid3.jpg"
+              alt="Vintage home decor and art"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='grid3.jpg'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-wood-dark/50 to-transparent"></div>
+          </div>
+          <div class="p-7">
+            <div class="feature-icon">
+              <i class="fa-solid fa-palette text-sepia text-xl"></i>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-charcoal mb-3 text-center">Home Décor &amp; Art</h3>
+            <p class="font-sans text-sm text-warm-gray leading-relaxed text-center">
+              Oil paintings, vintage maps, ornate mirrors, and antique clocks. Transform any room into a gallery with pieces that no modern store can replicate.
+            </p>
+            <div class="mt-5 text-center">
+              <a href="#visit" class="text-sepia text-xs font-sans font-semibold uppercase tracking-widest hover:text-sepia-dark transition-colors">
+                Browse In-Store <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       ABOUT / STORY
+  ══════════════════════════ -->
+  <section class="bg-cream py-20 lg:py-24 px-5 overflow-hidden">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <div class="relative reveal">
+        <img
+          src="story.avif"
+          alt="Antique shop owner with vintage items"
+          class="w-full h-80 lg:h-[440px] object-cover shadow-xl"
+          onerror="this.src='story.avif'"
+        />
+        <div class="absolute -bottom-5 -right-5 bg-sepia text-ivory p-5 shadow-lg hidden sm:block">
+          <p class="font-serif text-2xl font-bold">30+</p>
+          <p class="font-sans text-xs tracking-widest uppercase mt-0.5 text-sepia-light">Years of History</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay: 0.15s">
+        <div class="ornament justify-start">
+          <span>&#10022;</span>
+        </div>
+        <p class="text-xs uppercase tracking-[0.22em] font-sans font-semibold text-sepia mb-3">Our Story</p>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-6 leading-snug">
+          More Than a Shop—<br /><span class="italic font-normal">A Living Museum</span>
+        </h2>
+        <p class="font-sans text-base text-warm-gray leading-relaxed mb-5">
+          Nestled in the heart of Cottondale, A to Z Antiques has been a cornerstone of the local community for generations. Founded with a simple belief—that every object carries a story worth preserving—we've spent decades sourcing extraordinary pieces from estate sales, private collections, and far-flung auctions.
+        </p>
+        <p class="font-sans text-base text-warm-gray leading-relaxed mb-8">
+          When you walk through our doors, you're not just shopping. You're walking through history. Our knowledgeable staff is always on hand to share the provenance of each item and help you find exactly what you're looking for.
+        </p>
+        <a href="#visit" class="btn-primary text-sm">
+          Plan Your Visit <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       TESTIMONIALS
+  ══════════════════════════ -->
+  <section id="reviews" class="bg-ivory py-20 lg:py-28 px-5">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <div class="ornament"><span>&#10022;</span></div>
+        <p class="text-xs uppercase tracking-[0.22em] font-sans font-semibold text-sepia mb-3">Customer Reviews</p>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mb-5">
+          What Our Visitors Say
+        </h2>
+        <p class="font-sans text-base text-warm-gray leading-relaxed">
+          Don't just take our word for it. Here's what fellow treasure hunters from Cottondale and beyond have to say.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+
+        <!-- Review 1 -->
+        <div class="testimonial-card p-7 reveal card-lift">
+          <div class="flex gap-1 mb-4">
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+          </div>
+          <div class="flex items-center gap-2 mb-5">
+            <i class="fa-brands fa-yelp text-red-500 text-base"></i>
+            <span class="font-sans text-xs text-warm-gray tracking-wide">Reviewed on Yelp</span>
+          </div>
+          <blockquote class="font-serif text-base italic text-charcoal leading-relaxed mb-6">
+            "I stumbled in on a Saturday afternoon expecting to browse for ten minutes and ended up staying two hours. Found an absolutely gorgeous art deco vanity mirror for a fraction of what it would cost elsewhere. The owner knew its entire history—what an incredible place."
+          </blockquote>
+          <div class="flex items-center gap-3 pt-5 border-t border-cream">
+            <div class="w-10 h-10 rounded-full bg-sepia/20 flex items-center justify-center flex-shrink-0">
+              <span class="font-serif font-bold text-sepia text-sm">MR</span>
+            </div>
+            <div>
+              <p class="font-sans font-semibold text-sm text-charcoal">Margaret R.</p>
+              <p class="font-sans text-xs text-warm-gray">Dothan, AL</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="testimonial-card p-7 reveal card-lift" style="transition-delay: 0.1s">
+          <div class="flex gap-1 mb-4">
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+          </div>
+          <div class="flex items-center gap-2 mb-5">
+            <i class="fa-brands fa-google text-blue-500 text-base"></i>
+            <span class="font-sans text-xs text-warm-gray tracking-wide">Reviewed on Google</span>
+          </div>
+          <blockquote class="font-serif text-base italic text-charcoal leading-relaxed mb-6">
+            "A to Z Antiques is a true gem in Cottondale. I've been going for years and there's always something new. Last visit I picked up a set of 1940s cast iron skillets in perfect condition. The staff is warm, friendly, and never pushy. Highly recommend to everyone!"
+          </blockquote>
+          <div class="flex items-center gap-3 pt-5 border-t border-cream">
+            <div class="w-10 h-10 rounded-full bg-sepia/20 flex items-center justify-center flex-shrink-0">
+              <span class="font-serif font-bold text-sepia text-sm">JT</span>
+            </div>
+            <div>
+              <p class="font-sans font-semibold text-sm text-charcoal">James T.</p>
+              <p class="font-sans text-xs text-warm-gray">Cottondale, FL</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="testimonial-card p-7 reveal card-lift" style="transition-delay: 0.2s">
+          <div class="flex gap-1 mb-4">
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+            <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+          </div>
+          <div class="flex items-center gap-2 mb-5">
+            <i class="fa-brands fa-facebook text-blue-600 text-base"></i>
+            <span class="font-sans text-xs text-warm-gray tracking-wide">Reviewed on Facebook</span>
+          </div>
+          <blockquote class="font-serif text-base italic text-charcoal leading-relaxed mb-6">
+            "My grandmother used to bring me here as a child, and now I bring my own kids. Nothing has changed except the inventory keeps getting better! Found a beautiful set of Victorian silverware for our dining room. This shop has real soul—you simply can't find that anywhere else."
+          </blockquote>
+          <div class="flex items-center gap-3 pt-5 border-t border-cream">
+            <div class="w-10 h-10 rounded-full bg-sepia/20 flex items-center justify-center flex-shrink-0">
+              <span class="font-serif font-bold text-sepia text-sm">LB</span>
+            </div>
+            <div>
+              <p class="font-sans font-semibold text-sm text-charcoal">Linda B.</p>
+              <p class="font-sans text-xs text-warm-gray">Marianna, FL</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Aggregate rating -->
+      <div class="mt-12 text-center reveal">
+        <div class="inline-flex flex-col items-center gap-2 bg-parchment border border-cream px-10 py-6">
+          <div class="flex gap-1">
+            <i class="fa-solid fa-star text-amber-500 text-xl"></i>
+            <i class="fa-solid fa-star text-amber-500 text-xl"></i>
+            <i class="fa-solid fa-star text-amber-500 text-xl"></i>
+            <i class="fa-solid fa-star text-amber-500 text-xl"></i>
+            <i class="fa-solid fa-star text-amber-500 text-xl"></i>
+          </div>
+          <p class="font-serif text-2xl font-bold text-charcoal">4.9 / 5.0</p>
+          <p class="font-sans text-xs text-warm-gray tracking-wide uppercase">Based on 120+ Reviews Across Platforms</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       CTA / LOCATION BANNER
+  ══════════════════════════ -->
+  <section id="visit" class="cta-banner py-20 lg:py-28 px-5">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <p class="text-xs uppercase tracking-[0.22em] font-sans font-semibold text-sepia-light mb-3">Come Find Us</p>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-ivory mb-5">
+          Visit Us in Cottondale
+        </h2>
+        <p class="font-sans text-base text-warm-gray-light leading-relaxed">
+          Come browse at your own pace. Our doors are always open for collectors, decorators, and the simply curious.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+
+        <!-- Info column -->
+        <div class="lg:col-span-2 flex flex-col gap-6 reveal">
+
+          <!-- Address -->
+          <div class="bg-white/5 border border-white/10 p-6 flex gap-4 items-start">
+            <div class="w-10 h-10 bg-sepia/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i class="fa-solid fa-map-pin text-sepia-light text-sm"></i>
+            </div>
+            <div>
+              <p class="font-sans text-xs uppercase tracking-widest text-sepia-light font-semibold mb-1">Address</p>
+              <p class="font-serif text-base text-ivory font-medium">A to Z Antiques</p>
+              <p class="font-sans text-sm text-warm-gray-light mt-0.5">Cottondale, FL 32431</p>
+            </div>
+          </div>
+
+          <!-- Hours -->
+          <div class="bg-white/5 border border-white/10 p-6 flex gap-4 items-start">
+            <div class="w-10 h-10 bg-sepia/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i class="fa-regular fa-clock text-sepia-light text-sm"></i>
+            </div>
+            <div class="w-full">
+              <p class="font-sans text-xs uppercase tracking-widest text-sepia-light font-semibold mb-3">Hours of Operation</p>
+              <div class="space-y-1.5">
+                <div class="flex justify-between">
+                  <span class="font-sans text-sm text-warm-gray-light">Monday – Friday</span>
+                  <span class="font-sans text-sm text-ivory font-medium">10:00 AM – 6:00 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="font-sans text-sm text-warm-gray-light">Saturday</span>
+                  <span class="font-sans text-sm text-ivory font-medium">9:00 AM – 7:00 PM</span>
+                </div>
+                <div class="flex justify-between border-t border-white/10 pt-1.5 mt-1.5">
+                  <span class="font-sans text-sm text-warm-gray-light">Sunday</span>
+                  <span class="font-sans text-sm text-red-400 font-medium">Closed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="bg-white/5 border border-white/10 p-6 flex gap-4 items-start">
+            <div class="w-10 h-10 bg-sepia/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i class="fa-solid fa-phone text-sepia-light text-sm"></i>
+            </div>
+            <div>
+              <p class="font-sans text-xs uppercase tracking-widest text-sepia-light font-semibold mb-1">Phone</p>
+              <a href="tel:+18505555921" class="font-serif text-lg text-ivory font-medium hover:text-sepia-light transition-colors">
+                (850) 555-5921
+              </a>
+              <p class="font-sans text-xs text-warm-gray-light mt-0.5">Call ahead during peak hours</p>
+            </div>
+          </div>
+
+          <a href="https://maps.google.com/?q=A+to+Z+Antiques+Cottondale+FL" target="_blank" rel="noopener"
+             class="btn-primary text-sm text-center">
+            <i class="fa-solid fa-location-dot mr-2 text-xs"></i>Get Directions on Google Maps
+          </a>
+        </div>
+
+        <!-- Map column -->
+        <div class="lg:col-span-3 reveal" style="transition-delay: 0.15s">
+          <div class="relative h-80 lg:h-[420px] overflow-hidden border border-white/10 shadow-2xl">
+            <iframe
+              title="A to Z Antiques location in Cottondale FL"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55400!2d-85.4941!3d30.7971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x889104c4b0dae921%3A0x3d87a99e72dd73c8!2sCottondale%2C%20FL%2032431!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+              width="100%"
+              height="100%"
+              style="border:0; filter: sepia(20%) contrast(95%);"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="absolute inset-0 w-full h-full"
+            ></iframe>
+          </div>
+          <p class="font-sans text-xs text-warm-gray-light mt-2 text-right tracking-wide">
+            <i class="fa-solid fa-circle-info mr-1 text-sepia-light"></i>
+            Cottondale, FL 32431 — Free on-street parking available
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       FOOTER
+  ══════════════════════════ -->
+  <footer class="bg-wood-dark py-12 px-5">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
+
+        <!-- Brand -->
+        <div>
+          <h4 class="font-serif text-xl font-bold text-ivory mb-2">A to Z Antiques</h4>
+          <p class="font-sans text-xs tracking-[0.2em] uppercase text-warm-gray-light mb-4">Est. Cottondale, FL</p>
+          <p class="font-sans text-sm text-warm-gray-light leading-relaxed">
+            Your local destination for vintage treasures, rare collectibles, and timeless home décor. Where every visit is a new discovery.
+          </p>
+          <div class="flex gap-4 mt-6">
+            <a href="#" aria-label="Facebook" class="w-9 h-9 bg-white/5 hover:bg-sepia flex items-center justify-center transition-colors duration-200">
+              <i class="fa-brands fa-facebook-f text-ivory text-sm"></i>
+            </a>
+            <a href="#" aria-label="Instagram" class="w-9 h-9 bg-white/5 hover:bg-sepia flex items-center justify-center transition-colors duration-200">
+              <i class="fa-brands fa-instagram text-ivory text-sm"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h5 class="font-sans text-xs uppercase tracking-widest font-semibold text-sepia-light mb-5">Quick Links</h5>
+          <ul class="space-y-2.5">
+            <li><a href="#home"     class="font-sans text-sm text-warm-gray-light hover:text-ivory transition-colors">Home</a></li>
+            <li><a href="#features" class="font-sans text-sm text-warm-gray-light hover:text-ivory transition-colors">Featured Finds</a></li>
+            <li><a href="#reviews"  class="font-sans text-sm text-warm-gray-light hover:text-ivory transition-colors">Customer Reviews</a></li>
+            <li><a href="#visit"    class="font-sans text-sm text-warm-gray-light hover:text-ivory transition-colors">Visit Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h5 class="font-sans text-xs uppercase tracking-widest font-semibold text-sepia-light mb-5">Contact</h5>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-map-pin text-sepia-light text-xs mt-1"></i>
+              <span class="font-sans text-sm text-warm-gray-light">Cottondale, FL 32431</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-phone text-sepia-light text-xs mt-1"></i>
+              <a href="tel:+18505555921" class="font-sans text-sm text-warm-gray-light hover:text-ivory transition-colors">(850) 555-5921</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-regular fa-clock text-sepia-light text-xs mt-1"></i>
+              <span class="font-sans text-sm text-warm-gray-light">Mon–Fri: 10 AM–6 PM<br />Sat: 9 AM–7 PM</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
+        <p class="font-sans text-xs text-warm-gray-light">
+          &copy; <span id="copyright-year"></span> A to Z Antiques. All rights reserved.
+        </p>
+        <div class="flex gap-6">
+          <a href="#" class="font-sans text-xs text-warm-gray-light hover:text-ivory transition-colors">Privacy Policy</a>
+          <a href="#" class="font-sans text-xs text-warm-gray-light hover:text-ivory transition-colors">Terms of Use</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════════
+       VANILLA JAVASCRIPT
+  ══════════════════════════ -->
+  <script>
+    /* Copyright year */
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+    /* Sticky header shadow */
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('shadow-md', window.scrollY > 20);
+    }, { passive: true });
+
+    /* Mobile hamburger */
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const bars       = hamburger.querySelectorAll('.ham-bar');
+
+    function toggleMenu(open) {
+      mobileMenu.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+      if (open) {
+        bars[0].style.cssText = 'transform: translateY(8px) rotate(45deg)';
+        bars[1].style.opacity = '0';
+        bars[2].style.cssText = 'transform: translateY(-8px) rotate(-45deg); width: 100%';
+      } else {
+        bars[0].style.cssText = '';
+        bars[1].style.opacity = '';
+        bars[2].style.cssText = '';
+      }
+    }
+
+    hamburger.addEventListener('click', () => {
+      toggleMenu(!mobileMenu.classList.contains('open'));
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => toggleMenu(false));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!header.contains(e.target) && mobileMenu.classList.contains('open')) {
+        toggleMenu(false);
+      }
+    });
+
+    /* Scroll-reveal */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* Active nav highlight */
+    const navLinks = document.querySelectorAll('a.nav-link');
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.style.color = '';
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.style.color = '#a0522d';
+            }
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+
+    document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s));
+  </script>
+
+</body>
+</html>
